@@ -1,0 +1,22 @@
+.no-display{display:none !important}.no-transition,.no-transition *{transition:none !important}.unselectable{-webkit-user-select:none !important;-moz-user-select:none !important;-ms-user-select:none !important;user-select:none !important;cursor:not-allowed}.hidden-layer,.hidden-layer *{opacity:0;z-index:1;cursor:crosshair !important}.visible-layer,.visible-layer *{opacity:1;z-index:-1;pointer-events:none;transition:all .7s}.visible-layer .lmdd-mirror.gf-transition{transition:all .3s !important}.visible-layer .lmdd-mirror{z-index:1;position:absolute;margin:0;pointer-events:none;transition:top 00s,left 00s !important;opacity:.5}.lmdd-shadow{opacity:.5}.lmdd-hidden{visibility:hidden}
+/*MIT License
+
+Copyright (c) 2017 Yair Levy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.*/

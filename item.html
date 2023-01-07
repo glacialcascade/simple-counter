@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat sightings (Item) | Simple Counter</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Item detail: Cat sightings</h2>
+        <a class="btn blue" href="list.html">Back to list <i class="material-icons left">arrow_back</i></a>
+        <a class="btn red">Delete <i class="material-icons left">delete</i></a>
+        <a class="btn waves-effect waves-light modal-trigger" id="rename-item" href="#edit">Rename/Edit
+            <i class="material-icons right">edit</i></a>
+        <table class="highlight" style="font-size:18px">
+            <tbody>
+                <tr>
+                    <th>Description</th>
+                    <td> <span style="line-height:36px">logging cat sightings</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Count:</th>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <th>Tags:</th>
+                    <td>
+                        <div class="item-tags">
+                            <a class="chip" href="tag.html">animal</a>
+                            <a class="chip" href="tag.html">counting</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="modal" id="edit">
+
+            <div class="modal-content">
+
+                <h2>Edit item:</h2>
+                <form>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="nameInput">Item Name:</label>
+                            <input type="text" name="name" id="nameInput" class="validate" data-length="32" value="Cat sightings">
+                        </div>
+                        <div class="input-field col s6">
+                            <label for="quantityInput">Item Quantity:</label>
+                            <input type="number" name="quantity" id="quantityInput" value=15>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="descriptionInput">Item Description:</label>
+                            <textarea class="materialize-textarea"
+                                id="descriptionInput">logging cat sightings</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn waves-effect waves-light" type="submit">
+                            <i class="material-icons right">send</i>
+                            Submit
+                        </button>
+                        <button class="modal-close waves-effect waves-green btn-flat">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <script> M.AutoInit();</script>
+</body>
+
+</html>

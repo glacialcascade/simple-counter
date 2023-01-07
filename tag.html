@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animal (Tag) | Simple Counter</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Tag detail: animal</h2>
+        <a class="btn blue" href="list.html">Back to list <i class="material-icons left">arrow_back</i></a>
+        <a class="btn green darken-2" href="list.html">Filter by this tag
+            <i class="material-icons left">filter_list</i></a>
+        <a class="btn red">Delete <i class="material-icons left">delete</i></a>
+        <a class="btn waves-effect waves-light modal-trigger" id="rename-item" href="#edit">Rename/Edit
+            <i class="material-icons right">edit</i></a>
+        <table class="highlight" style="font-size:18px">
+            <tbody>
+                <tr>
+                    <th>Description</th>
+                    <td> <span style="line-height:36px">This tag is for
+                            items that represent some type of animal.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th># of items:</th>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <th>Total:</th>
+                    <td>45</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>Items with this tag (sorted by count):</h5>
+        <ul class="collection" style="font-size:18px">
+            <li class="collection-item"><a href="item.html">Dog sightings</a> <span class="secondary-content black-text"
+                    style="font-weight:700;">18</span></li>
+            <li class="collection-item"><a href="item.html">Bird sightings</a> <span
+                    class="secondary-content black-text" style="font-weight:700;">15</span></li>
+            <li class="collection-item"><a href="item.html">Cat sightings</a> <span class="secondary-content black-text"
+                    style="font-weight:700;">12</span></li>
+        </ul>
+
+        <div class="modal" id="edit">
+
+            <div class="modal-content">
+
+                <h2>Edit tag:</h2>
+                <form>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="nameInput">Tag Name:</label>
+                            <input value="animal" type="text" name="name" id="nameInput" class="validate"
+                                data-length="32">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="descriptionInput">Tag Description:</label>
+                            <textarea class="materialize-textarea"
+                                id="descriptionInput"> This tag is for items that represent some type of animal. </textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn waves-effect waves-light" type="submit">
+                            <i class="material-icons right">send</i>
+                            Submit
+                        </button>
+                        <button class="modal-close waves-effect waves-green btn-flat">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <script> M.AutoInit();</script>
+</body>
+
+</html>
