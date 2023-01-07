@@ -54,7 +54,8 @@
                     <div class="row">
                         <div class="input-field col s6">
                             <label for="nameInput">Item Name:</label>
-                            <input type="text" name="name" id="nameInput" class="validate" data-length="32" value="Cat sightings">
+                            <input type="text" name="name" id="nameInput" class="validate" data-length="32"
+                                value="Cat sightings">
                         </div>
                         <div class="input-field col s6">
                             <label for="quantityInput">Item Quantity:</label>
@@ -66,6 +67,11 @@
                             <label for="descriptionInput">Item Description:</label>
                             <textarea class="materialize-textarea"
                                 id="descriptionInput">logging cat sightings</textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="chips no-autoinit" id="filter-tags"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -80,7 +86,31 @@
 
         </div>
     </div>
-    <script> M.AutoInit();</script>
+    <script>
+        M.AutoInit();
+        taglist = {
+            'animal': null,
+            'counting': null,
+            'inventory': null,
+            'progress': null,
+            'school': null,
+            'vehicle': null
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.chips');
+            var instances = M.Chips.init(elems, {
+                placeholder: 'Tags',
+                secondaryPlaceholder: 'Add more tags',
+                autocompleteOptions: {
+                    data: taglist,
+                    limit: Infinity,
+                    minLength: 1
+                },
+                onChipAdd: (e, chip) => {
+                    /* make it so that it disallows nonexistent tags */
+                }
+            });
+        });</script>
 </body>
 
 </html>

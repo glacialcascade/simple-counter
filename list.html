@@ -539,6 +539,11 @@
                         <textarea class="materialize-textarea" id="descriptionInput"></textarea>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="chips no-autoinit" id="item-tags"></div>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button class="btn waves-effect waves-light" type="submit">
                         <i class="material-icons right">create</i>
@@ -583,7 +588,7 @@
             'vehicle': null
         };
         document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('#filter-tags');
+            var elems = document.querySelectorAll('.chips');
             var instances = M.Chips.init(elems, {
                 placeholder: 'Tags',
                 secondaryPlaceholder: 'Add more tags',
