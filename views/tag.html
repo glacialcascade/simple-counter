@@ -13,13 +13,15 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="/stylesheets/main.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
         <h2>Tag detail: animal</h2>
-        <a class="btn blue" href="list.html">Back to list <i class="material-icons left">arrow_back</i></a>
-        <a class="btn green darken-2" href="list.html">Filter by this tag
+        <a class="btn blue" href="/list">Back to list <i class="material-icons left">arrow_back</i></a>
+        <a class="btn green darken-2" href="/list">Filter by this tag
             <i class="material-icons left">filter_list</i></a>
         <a class="btn red">Delete <i class="material-icons left">delete</i></a>
         <a class="btn waves-effect waves-light modal-trigger" id="rename-item" href="#edit">Rename/Edit
@@ -44,12 +46,12 @@
         </table>
         <h5>Items with this tag (sorted by count):</h5>
         <ul class="collection" style="font-size:18px">
-            <li class="collection-item"><a href="item.html">Dog sightings</a> <span class="secondary-content black-text"
-                    style="font-weight:700;">18</span></li>
-            <li class="collection-item"><a href="item.html">Bird sightings</a> <span
-                    class="secondary-content black-text" style="font-weight:700;">15</span></li>
-            <li class="collection-item"><a href="item.html">Cat sightings</a> <span class="secondary-content black-text"
-                    style="font-weight:700;">12</span></li>
+            <li class="collection-item"><a href="/item">Dog sightings</a> <span
+                    class="secondary-content black-text small-item-count right">18</span></li>
+            <li class="collection-item"><a href="/item">Bird sightings</a> <span
+                    class="secondary-content black-text small-item-count right">15</span></li>
+            <li class="collection-item"><a href="/item">Cat sightings</a> <span
+                    class="secondary-content black-text small-item-count right">12</span></li>
         </ul>
 
         <div class="modal" id="edit">

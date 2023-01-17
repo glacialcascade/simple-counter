@@ -1,0 +1,78 @@
+.collection-item.hist-item {
+    line-height: 36px;
+}
+
+.item-name {
+    margin-top: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.item-count {
+    color: black;
+    font-size: 3rem;
+    line-height: 3.5rem;
+}
+
+.item-icons {
+    font-size: 4rem;
+}
+
+.item-buttons {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translate(0%, -50%);
+}
+
+ul.dropdown-content.select-dropdown li span {
+    color: #000;
+}
+
+.counter-item {
+    display: flex;
+    position: relative;
+}
+
+.rd-icons {
+    flex: 0 0 7rem;
+}
+
+.rd-icons .lv-hide .material-icons {
+    font-size: 3rem;
+    line-height: 4rem;
+}
+
+.rd-icons .bv-hide .material-icons {
+    font-size: 3rem;
+    line-height: 5rem;
+}
+
+.item-main {
+    flex: 1;
+}
+
+.small-item-count {
+    font-weight: 700;
+}
+
+.space-right {
+    padding-right: 0.3em;
+}
+
+.col.row-button-div {
+    padding: 0 .5rem .2rem;
+}
+
+.row-button {
+    width: 100%;
+}
+
+.counter-item-button {
+    margin-bottom: 0px;
+}
+
+.counter-item-button a {
+    font-size: 20px;
+}

@@ -13,12 +13,14 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="/stylesheets/main.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
         <h2>Item detail: Cat sightings</h2>
-        <a class="btn blue" href="list.html">Back to list <i class="material-icons left">arrow_back</i></a>
+        <a class="btn blue" href="/list">Back to list <i class="material-icons left">arrow_back</i></a>
         <a class="btn red">Delete <i class="material-icons left">delete</i></a>
         <a class="btn waves-effect waves-light modal-trigger" id="rename-item" href="#edit">Rename/Edit
             <i class="material-icons right">edit</i></a>
@@ -26,8 +28,7 @@
             <tbody>
                 <tr>
                     <th>Description</th>
-                    <td> <span style="line-height:36px">logging cat sightings</span>
-                    </td>
+                    <td> logging cat sightings </td>
                 </tr>
                 <tr>
                     <th>Count:</th>
@@ -37,8 +38,8 @@
                     <th>Tags:</th>
                     <td>
                         <div class="item-tags">
-                            <a class="chip" href="tag.html">animal</a>
-                            <a class="chip" href="tag.html">counting</a>
+                            <a class="chip" href="/tag">animal</a>
+                            <a class="chip" href="/tag">counting</a>
                         </div>
                     </td>
                 </tr>
@@ -105,9 +106,6 @@
                     data: taglist,
                     limit: Infinity,
                     minLength: 1
-                },
-                onChipAdd: (e, chip) => {
-                    /* make it so that it disallows nonexistent tags */
                 }
             });
         });</script>
