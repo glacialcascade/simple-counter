@@ -1,0 +1,8 @@
+# rename this file to .env, replace variables
+# MySQL Database configuration
+DB_HOST=<hostname>
+DB_PORT=3306
+DB_USER=<username>
+DB_PASSWORD=<password>
+DB_DATABASE=<schema>
+DB_CONNECT_TIMEOUT=10000
