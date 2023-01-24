@@ -3,9 +3,9 @@ const db = require("./db_connection");
 
 /**** Delete existing tables, if any ****/
 
+db.execute("DROP TABLE IF EXISTS \`taggeditems\`;");
 db.execute("DROP TABLE IF EXISTS \`tags\`;");
 db.execute("DROP TABLE IF EXISTS \`items\`;");
-db.execute("DROP TABLE IF EXISTS \`taggeditems\`;");
 
 /**** Create tables  ****/
 
@@ -21,6 +21,7 @@ const create_tables_sql = [`
         name VARCHAR(45) NOT NULL,
         count INT NOT NULL,
         description VARCHAR(150) NULL,
+        sort_order INT NOT NULL,
         PRIMARY KEY (id)
     );
 `, `    
@@ -42,9 +43,9 @@ db.execute(create_tables_sql[2]);
 
 const insert_items_table_sql = `
     INSERT INTO items 
-        (name, count, description) 
+        (name, count, description, sort_order) 
     VALUES 
-        (?, ?, ?);
+        (?, ?, ?, ?);
 `
 const insert_tags_table_sql = `
     INSERT INTO tags 
@@ -59,11 +60,11 @@ const insert_bridge_table_sql = `
     VALUES 
         (?, ?);
 `
-db.execute(insert_items_table_sql, ['Cat sightings', '12', 'logging cat sightings']);
-db.execute(insert_items_table_sql, ['Dog sightings', '18', 'logging dog sightings']);
-db.execute(insert_items_table_sql, ['Bird sightings', '15', 'logging bird sightings']);
-db.execute(insert_items_table_sql, ['Socks', '15', 'in the sock drawer']);
-db.execute(insert_items_table_sql, ['Math problems done', '9', null]);
+db.execute(insert_items_table_sql, ['Cat sightings', '12', 'logging cat sightings', '1']);
+db.execute(insert_items_table_sql, ['Dog sightings', '18', 'logging dog sightings', '2']);
+db.execute(insert_items_table_sql, ['Bird sightings', '15', 'logging bird sightings', '3']);
+db.execute(insert_items_table_sql, ['Socks', '15', 'in the sock drawer', '4']);
+db.execute(insert_items_table_sql, ['Math problems done', '9', null, '5']);
 
 db.execute(insert_tags_table_sql, ['animal', 'This tag is for items that represent some type of animal.']);
 db.execute(insert_tags_table_sql, ['counting', 'This tag is for items that count events.']);
