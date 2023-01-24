@@ -84,7 +84,8 @@ db.execute(insert_bridge_table_sql, ['5', 'progress']);
 
 /**** Read the sample items inserted ****/
 
-const read_tables_sql = "SELECT * FROM tags AS t INNER JOIN taggeditems AS b ON b.tag_name = t.name INNER JOIN items AS i ON i.id = b.item_id";
+const read_tables_sql = `SELECT a.id, a.name, a.count, a.description, a.sort_order, GROUP_CONCAT(t.name) AS tags
+ FROM items AS a LEFT JOIN taggeditems AS b ON b.item_id = a.id INNER JOIN tags AS t ON t.name = b.tag_name GROUP BY a.id`;
 
 db.execute(read_tables_sql,
     (error, results) => {
