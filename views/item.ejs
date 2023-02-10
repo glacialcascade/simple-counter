@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat sightings (Item) | Simple Counter</title>
+    <title>
+        <%= name %> (Item) | Simple Counter
+    </title>
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/scripts/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link href="/stylesheets/main.css" rel="stylesheet">
@@ -19,27 +21,35 @@
 
 <body>
     <div class="container">
-        <h2>Item detail: Cat sightings</h2>
+        <h2>Item detail: <%= name %>
+        </h2>
         <a class="btn blue" href="/list">Back to list <i class="material-icons left">arrow_back</i></a>
-        <a class="btn red">Delete <i class="material-icons left">delete</i></a>
+        <a class="btn red" href="/item/<%= id %>/delete">Delete <i class="material-icons left">delete</i></a>
         <a class="btn waves-effect waves-light modal-trigger" id="rename-item" href="#edit">Rename/Edit
             <i class="material-icons right">edit</i></a>
         <table class="highlight" style="font-size:18px">
             <tbody>
                 <tr>
                     <th>Description</th>
-                    <td> logging cat sightings </td>
+                    <td>
+                        <%= description %>
+                    </td>
                 </tr>
                 <tr>
                     <th>Count:</th>
-                    <td>15</td>
+                    <td>
+                        <%= count %>
+                    </td>
                 </tr>
                 <tr>
                     <th>Tags:</th>
                     <td>
                         <div class="item-tags">
-                            <a class="chip" href="/tag">animal</a>
-                            <a class="chip" href="/tag">counting</a>
+                            <% if(tags) { for(let i=0; i < tags.length; i++) {%>
+                                <a class="chip" href="/tag/<%= tags[i] %>">
+                                    <%= tags[i] %>
+                                </a>
+                                <% } } %>
                         </div>
                     </td>
                 </tr>
@@ -51,23 +61,22 @@
             <div class="modal-content">
 
                 <h2>Edit item:</h2>
-                <form>
+                <form method="post" action="/item/<%= id %>">
                     <div class="row">
                         <div class="input-field col s6">
                             <label for="nameInput">Item Name:</label>
                             <input type="text" name="name" id="nameInput" class="validate" data-length="32"
-                                value="Cat sightings">
+                                value="<%= name %>">
                         </div>
                         <div class="input-field col s6">
-                            <label for="quantityInput">Item Quantity:</label>
-                            <input type="number" name="quantity" id="quantityInput" value=15>
+                            <label for="countInput">Item Count:</label>
+                            <input type="number" name="count" id="countInput" value=<%=count %>>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <label for="descriptionInput">Item Description:</label>
-                            <textarea class="materialize-textarea"
-                                id="descriptionInput">logging cat sightings</textarea>
+                            <textarea class="materialize-textarea" name="description" id="descriptionInput"><%= description %></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -90,12 +99,7 @@
     <script>
         M.AutoInit();
         taglist = {
-            'animal': null,
-            'counting': null,
-            'inventory': null,
-            'progress': null,
-            'school': null,
-            'vehicle': null
+                    /* FIXME TODO */
         };
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.chips');
@@ -106,8 +110,10 @@
                     data: taglist,
                     limit: Infinity,
                     minLength: 1
-                }
-            });
+                }, data: [                            
+                    /* FIXME TODO */
+            ]
+        });
         });</script>
 </body>
 

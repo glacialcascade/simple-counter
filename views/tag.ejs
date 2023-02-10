@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>animal (Tag) | Simple Counter</title>
+    <title><%= name %> (Tag) | Simple Counter</title>
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/scripts/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link href="/stylesheets/main.css" rel="stylesheet">
@@ -19,9 +19,9 @@
 
 <body>
     <div class="container">
-        <h2>Tag detail: animal</h2>
+        <h2>Tag detail: <%= name %></h2>
         <a class="btn blue" href="/list">Back to list <i class="material-icons left">arrow_back</i></a>
-        <a class="btn green darken-2" href="/list">Filter by this tag
+        <a class="btn green darken-2" href="/list">Filter by this tag <!-- TODO -->
             <i class="material-icons left">filter_list</i></a>
         <a class="btn red">Delete <i class="material-icons left">delete</i></a>
         <a class="btn waves-effect waves-light modal-trigger" id="rename-item" href="#edit">Rename/Edit
@@ -30,28 +30,25 @@
             <tbody>
                 <tr>
                     <th>Description</th>
-                    <td> <span style="line-height:36px">This tag is for
-                            items that represent some type of animal.</span>
+                    <td> <span style="line-height:36px"><%= description %></span>
                     </td>
                 </tr>
                 <tr>
                     <th># of items:</th>
-                    <td>3</td>
+                    <td><%= items.length %></td>
                 </tr>
                 <tr>
                     <th>Total:</th>
-                    <td>45</td>
+                    <td><%= total %></td>
                 </tr>
             </tbody>
         </table>
         <h5>Items with this tag (sorted by count):</h5>
         <ul class="collection" style="font-size:18px">
-            <li class="collection-item"><a href="/item">Dog sightings</a> <span
-                    class="secondary-content black-text small-item-count right">18</span></li>
-            <li class="collection-item"><a href="/item">Bird sightings</a> <span
-                    class="secondary-content black-text small-item-count right">15</span></li>
-            <li class="collection-item"><a href="/item">Cat sightings</a> <span
-                    class="secondary-content black-text small-item-count right">12</span></li>
+            <% for (let i = 0; i < items.length; i++) { %>
+            <li class="collection-item"><a href="/item/<%= items[i].id %>"><%= items[i].item %></a> <span
+                    class="secondary-content black-text small-item-count right"><%= items[i].count %></span></li>
+            <% } %>
         </ul>
 
         <div class="modal" id="edit">

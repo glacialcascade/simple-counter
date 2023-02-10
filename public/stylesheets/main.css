@@ -76,3 +76,7 @@ ul.dropdown-content.select-dropdown li span {
 .counter-item-button a {
     font-size: 20px;
 }
+
+.item-name-link {
+    color: black;
+}

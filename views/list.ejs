@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Counter</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="/scripts/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/scripts/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link href="/stylesheets/lmdd.min.css" rel="stylesheet">
+    <script src="/scripts/lmdd.min.js"></script>
+
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <script>
+        function updateState() {
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+            if (params.view == "button") {
+                $(".bv-hide").hide();
+                $(".lv-hide").show();
+            } else {
+                $(".lv-hide").hide();
+                $(".bv-hide").show();
+            }
+            if (params.rd == "true") {
+                $(".rd-hide").hide();
+                $(".rd-show").show();
+                lmdd.set(document.getElementById('items'), {
+                    containerClass: "collection",
+                    draggableItemClass: "collection-item",
+                    handleClass: "handle"
+                });
+            } else {
+                $(".rd-show").hide();
+                $(".rd-hide").show();
+            }
+        }
+
+        function insertUrlParam(key, value) {
+            if (history.pushState) {
+                let searchParams = new URLSearchParams(window.location.search);
+                searchParams.set(key, value);
+                let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
+                window.history.pushState({}, '', newurl);
+            }
+            updateState();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="top">
+            <h2>Simple Counter</h2>
+            <div id="nav" class="row">
+                <!--<div class="col s12 m6 row-button-div">
+                    <a class="btn blue row-button" href="/hist">History/undo</a>
+                </div>-->
+                <div class="col s12 row-button-div">
+                    <a class="btn blue bv-hide row-button" onclick="insertUrlParam('view','button');">Button
+                        view</a>
+                    <a class="btn blue lv-hide row-button" onclick="insertUrlParam('view','list');">List
+                        view</a>
+                </div>
+            </div>
+            <hr>
+            <div id="top-buttons" class="row">
+                <div class="col s12 m4 row-button-div"><a
+                        class="btn green darken-2 modal-trigger waves-effect waves-light row-button" href="#filter"
+                       >Filter/Sort<i class="material-icons right">filter_list</i></a></div>
+                <div class="col s12 m4 row-button-div"><a
+                        class="btn green darken-2 modal-trigger waves-effect waves-light row-button"
+                        href="#add">Add item <i class="material-icons right">add</i></a></div>
+                <div class="col s12 m4 input-field" style="padding:0 .5rem .2rem; margin:0">
+                    <i class="material-icons prefix">search</i>
+                    <input id="search-box" placeholder="SEARCH" stype="text"
+                        style="height: 36px; line-height:36px; margin-bottom:0px">
+                </div>
+            </div>
+        </div>
+        <ul class="collection" id="items" style='height:calc(100vh - 22rem); overflow:auto;'>
+            <% for (let i = 0; i < inventory.length; i++) { %>
+            <li class="collection-item counter-item">
+                <div class="rd-show rd-icons">
+                    <div class="bv-hide">
+                        <i class="material-icons handle">drag_handle</i>
+                        <a href="/item/<%= inventory[i].id %>/delete">
+                            <i class="material-icons red-text">delete</i>
+                        </a>
+                    </div>
+                    <div class="lv-hide">
+                        <i class="material-icons handle">drag_handle</i>
+                        <a href="/item/<%= inventory[i].id %>/delete">
+                            <i class="material-icons red-text">delete</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="item-main">
+                    <div class="bv-hide">
+                        <div class="item-buttons">
+                            <!-- TODO: figure out how to use display: grid for this -->
+                            <a href="/item/<%= inventory[i].id %>"><i class="material-icons item-icons left waves-effect">edit</i></a>
+                            <a href="#"><i
+                                    class="material-icons item-icons left red-text waves-effect waves-red">remove</i></a>
+                            <span class="item-count"><%= inventory[i].count %></span>
+                            <a href="#"><i
+                                    class="material-icons item-icons right green-text waves-effect waves-green">add</i></a>
+                        </div>
+                        <h5 class="item-name"><a href="/item/<%= inventory[i].id %>" class="item-name-link"><%= inventory[i].name %></a></h5>
+                        <div class="item-tags"> <% if (inventory[i].tags) {tags = inventory[i].tags.split(","); for (let j = 0; j < tags.length; j++){%>
+                            <a class="chip" href="/tag/<%= tags[j] %>"><%= tags[j] %></a>
+                            <% }} %>
+                        </div>
+                    </div>
+                    <div class="lv-hide row counter-item-button">
+                        <a class="btn-large col s12"><span class="left small-item-count space-right"><%= inventory[i].count %></span> <span class="left truncate"><%= inventory[i].name %></span></a>
+                    </div>
+                </div>
+            </li>
+            <% } %>
+        </ul>
+        <div id="bottom-buttons" class="row">
+            <div class="col s12 m6 row-button-div"> <a
+                    class="btn blue modal-trigger waves-effect waves-light row-button" href="#csv">Import/Export
+                    CSV<i class="material-icons right">import_export</i></a> </div>
+            <div class="col s12 m6 row-button-div"> <a class="btn red rd-hide row-button"
+                    onclick="insertUrlParam('rd','true')">Reorder/Delete
+                    items<i class="material-icons right">delete_sweep</i></a><a class="btn green rd-show row-button"
+                    onclick="insertUrlParam('rd','false')">Done
+                    <i class="material-icons right">check</i></a></div>
+        </div>
+
+    </div>
+    <div class="modal" id="filter">
+        <div class="modal-content">
+            <form>
+                <h3>Sort:</h3>
+                <div class="row">
+                    <div class="input-field col s12 black-text">
+                        <select>
+                            <option value="1">Default order</option>
+                            <option value="2">Descending count</option>
+                            <option value="3">Ascending count</option>
+                            <option value="4">By name (A-Z)</option>
+                            <option value="5">By name (Z-A)</option>
+                        </select>
+                    </div>
+
+                </div>
+                <h3>Filter:</h3>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="chips no-autoinit" id="filter-tags"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="switch col">
+                        Union
+                        <label>
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                        </label>
+                        Intersection
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light" type="submit">
+                        Go
+                    </button>
+                    <button class="modal-close waves-effect waves-green btn-flat">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="add">
+        <div class="modal-content">
+            <h2>Add item:</h2>
+            <form method="POST" action="/list">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="nameInput">Item Name:</label>
+                        <input type="text" name="name" id="nameInput" class="validate" data-length="32" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="countInput">Item Count:</label>
+                        <input type="number" name="count" id="countInput" value=0>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="descriptionInput">Item Description:</label>
+                        <textarea class="materialize-textarea" name="description" id="descriptionInput"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="chips no-autoinit" id="item-tags"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light" type="submit">
+                        <i class="material-icons right">create</i>
+                        Create
+                    </button>
+                    <button class="modal-close waves-effect waves-green btn-flat">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="csv">
+        <div class="modal-content">
+            <h2>Import/Export:</h2>
+            <form>
+                <div class="row">
+                    <textarea class="materialize-textarea"
+                        id="descriptionInput">some nice representation of the items</textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-light green darken-2" type="submit">
+                        <i class="material-icons right">upload</i>
+                        Import
+                    </button>
+                    <button class="btn waves-effect waves-light blue">
+                        <i class="material-icons right">download</i>
+                        Export
+                    </button>
+                    <button class="modal-close waves-effect waves-green btn-flat">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        M.AutoInit();
+        updateState();
+        taglist = {
+            'animal': null,
+            'counting': null,
+            'inventory': null,
+            'progress': null,
+            'school': null,
+            'vehicle': null                     /* FIXME TODO */
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.chips');
+            var instances = M.Chips.init(elems, {
+                placeholder: 'Tags',
+                secondaryPlaceholder: 'Add more tags',
+                autocompleteOptions: {
+                    data: taglist,
+                    limit: Infinity,
+                    minLength: 1
+                },
+                onChipAdd: (e, chip) => {
+
+                }
+            });
+        });
+
+        /* IMMEDIATE TODO:
+         * - remove other prototype objects (or add to the db)
+         * - make sort in the modal work
+         * - remove/comment out hist (not necessary rn)
+         */ 
+
+        /* TODO:
+         * - make it so that the filter form doesn't allow non-existent tags
+         * - change the list to use display: grid to align the stuff on the right
+         * - maybe find out how to make the buttons not flood browser history
+         * - have tag dropdowns not get cut off by the end of the modal
+         */
+
+    </script>
+</body>
+
+</html>

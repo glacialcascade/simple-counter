@@ -32,6 +32,7 @@ const create_tables_sql = [`
         PRIMARY KEY (id),
         FOREIGN KEY fk_tag (tag_name) REFERENCES tags (name),
         FOREIGN KEY fk_item (item_id) REFERENCES items (id)
+        ON DELETE CASCADE
     );
 `]
 db.execute(create_tables_sql[0]);
@@ -60,17 +61,24 @@ const insert_bridge_table_sql = `
     VALUES 
         (?, ?);
 `
-db.execute(insert_items_table_sql, ['Cat sightings', '12', 'logging cat sightings', '1']);
-db.execute(insert_items_table_sql, ['Dog sightings', '18', 'logging dog sightings', '2']);
-db.execute(insert_items_table_sql, ['Bird sightings', '15', 'logging bird sightings', '3']);
-db.execute(insert_items_table_sql, ['Socks', '15', 'in the sock drawer', '4']);
-db.execute(insert_items_table_sql, ['Math problems done', '9', null, '5']);
+db.execute(insert_items_table_sql, ['Cat sightings', '12', 'logging cat sightings', '100000']);
+db.execute(insert_items_table_sql, ['Dog sightings', '18', 'logging dog sightings', '90000']);
+db.execute(insert_items_table_sql, ['Bird sightings', '15', 'logging bird sightings', '80000']);
+db.execute(insert_items_table_sql, ['Socks', '15', 'in the sock drawer', '70000']);
+db.execute(insert_items_table_sql, ['Math problems done', '9', null, '60000']);
+db.execute(insert_items_table_sql, ['Chemistry problems done', '17', null, '50000']);
+db.execute(insert_items_table_sql, ['White cars', '43', 'Counted in an hour on Rte 4', '40000']);
+db.execute(insert_items_table_sql, ['Black cars', '23', 'Counted in an hour on Rte 4', '30000']);
+db.execute(insert_items_table_sql, ['% progress on prototype', '75', 'for Web Apps class', '20000']);
+db.execute(insert_items_table_sql, ['Days until 2024', '359', null, '10000']);
+
 
 db.execute(insert_tags_table_sql, ['animal', 'This tag is for items that represent some type of animal.']);
 db.execute(insert_tags_table_sql, ['counting', 'This tag is for items that count events.']);
 db.execute(insert_tags_table_sql, ['inventory', 'This tag is for items that count objects.']);
 db.execute(insert_tags_table_sql, ['school', 'This tag is for school-related items.']);
 db.execute(insert_tags_table_sql, ['progress', 'This tag is for items that log progress.']);
+db.execute(insert_tags_table_sql, ['vehicle', 'This tag is for items that count vehicles.']);
 
 db.execute(insert_bridge_table_sql, ['1', 'animal']);
 db.execute(insert_bridge_table_sql, ['1', 'counting']);
@@ -81,6 +89,15 @@ db.execute(insert_bridge_table_sql, ['3', 'counting']);
 db.execute(insert_bridge_table_sql, ['4', 'inventory']);
 db.execute(insert_bridge_table_sql, ['5', 'school']);
 db.execute(insert_bridge_table_sql, ['5', 'progress']);
+db.execute(insert_bridge_table_sql, ['6', 'school']);
+db.execute(insert_bridge_table_sql, ['6', 'progress']);
+db.execute(insert_bridge_table_sql, ['7', 'vehicle']);
+db.execute(insert_bridge_table_sql, ['7', 'counting']);
+db.execute(insert_bridge_table_sql, ['8', 'vehicle']);
+db.execute(insert_bridge_table_sql, ['8', 'counting']);
+db.execute(insert_bridge_table_sql, ['9', 'school']);
+db.execute(insert_bridge_table_sql, ['9', 'progress']);
+db.execute(insert_bridge_table_sql, ['10', 'progress']);
 
 /**** Read the sample items inserted ****/
 
