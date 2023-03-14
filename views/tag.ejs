@@ -18,6 +18,38 @@
 </head>
 
 <body>
+    <!-- Nav bar -->
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">Simple Counter</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <!-- Main nav, hidden for small screens -->
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/list"><i class="material-icons left">list</i>List</a></li>
+                    <% if (isLoggedIn) { %>
+                        <li><a class="btn red" href="/logout"> <i class="material-icons left">logout</i> Logout</a></li>
+                        <li><a href="/profile"><i class="material-icons left">person</i> <%=user.name %></a></li>
+                    <% } else { %>
+                        <li><a class="btn blue darken-2" href="/login"> <i class="material-icons left">login</i> Login</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+        <!-- Mobile nav menu, shown when menu button clicked -->
+        <ul id="mobile-nav" class="sidenav">
+            <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+            <li><a href="/list"><i class="material-icons left">list</i>List</a></li>
+            <% if (isLoggedIn) { %>
+                <li><a class="btn red" href="/logout"> <i class="material-icons left">logout</i> Logout</a></li>
+                <li><a href="/profile"><i class="material-icons left">person</i> <%=user.name %></a></li>
+            <% } else { %>
+                <li><a class="btn blue darken-2" href="/login"> <i class="material-icons left">login</i> Login</a></li>
+            <% } %>
+        </ul>
+    </header>
+
     <div class="container">
         <h2>Tag detail: <%= name %></h2>
         <a class="btn blue" href="/list">Back to list <i class="material-icons left">arrow_back</i></a>

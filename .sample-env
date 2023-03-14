@@ -6,3 +6,12 @@ DB_USER=<username>
 DB_PASSWORD=<password>
 DB_DATABASE=<schema>
 DB_CONNECT_TIMEOUT=10000
+
+
+INIT_EMAIL=<email>
+
+# Auth0 variables
+AUTH0_SECRET=<secret>
+AUTH0_BASE_URL=<url>
+AUTH0_CLIENT_ID=<id>
+AUTH0_ISSUER_BASE_URL=<url>

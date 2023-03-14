@@ -15,15 +15,55 @@
 </head>
 
 <body>
+     <!-- Nav bar -->
+     <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">Simple Counter</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <!-- Main nav, hidden for small screens -->
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/list"><i class="material-icons left">list</i>List</a></li>
+                    <% if (isLoggedIn) { %>
+                        <li><a class="btn red" href="/logout"> <i class="material-icons left">logout</i> Logout</a></li>
+                        <li><a href="/profile"><i class="material-icons left">person</i> <%=user.name %></a></li>
+                    <% } else { %>
+                        <li><a class="btn blue darken-2" href="/login"> <i class="material-icons left">login</i> Login</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+        <!-- Mobile nav menu, shown when menu button clicked -->
+        <ul id="mobile-nav" class="sidenav">
+            <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+            <li><a href="/list"><i class="material-icons left">list</i>List</a></li>
+            <% if (isLoggedIn) { %>
+                <li><a class="btn red" href="/logout"> <i class="material-icons left">logout</i> Logout</a></li>
+                <li><a href="/profile"><i class="material-icons left">person</i> <%=user.name %></a></li>
+            <% } else { %>
+                <li><a class="btn blue darken-2" href="/login"> <i class="material-icons left">login</i> Login</a></li>
+            <% } %>
+        </ul>
+    </header>
+
+    <!-- rest of the body -->
     <div class="container">
         <h1> Simple Counter </h1>
+        <% if (isLoggedIn) { %>
+        <a class="btn red" href="/logout"> <i class="material-icons left">logout</i> Logout</a>
+        <h1> Welcome <%= user.name %>! </h1>
+        <% } else { %>
+        <a class="btn blue darken-2" href="/login"> <i class="material-icons left">login</i> Login</a>
         <h2> Welcome! </h2>
+        <% } %>
         <a class="btn blue" href="/list"> <i class="material-icons right">arrow_forward</i> Enter</a>
         <div style="margin:80px" class="center-align">
             <img src="/images/counters.jpg" class="responsive-img" alt="Some mechanical counters">
             <caption><em><a href="https://commons.wikimedia.org/wiki/File:CountersMechanical.agr.jpg">CountersMechanical.agr.jpg, by ArnoldReinhold</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC BY-SA 3.0</a></em></caption>
         </div>
     </div>
+    <script> M.AutoInit();</script>
 </body>
 
 </html>

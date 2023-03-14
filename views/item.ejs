@@ -14,12 +14,76 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="/scripts/materialize.min.js"></script>
+    <script src="/scripts/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link href="/stylesheets/main.css" rel="stylesheet">
+    <script>
+        function updateState() {
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+            if (params.deltag == "true") {
+                $(".dt-hide").hide();
+                $(".dt-show").show();
+            } else {
+                $(".dt-show").hide();
+                $(".dt-hide").show();
+            }
+        }
+
+        function insertUrlParam(key, value) {
+            if (history.pushState) {
+                let searchParams = new URLSearchParams(window.location.search);
+                searchParams.set(key, value);
+                let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
+                window.history.pushState({}, '', newurl);
+            }
+            updateState();
+        }
+    </script>
 </head>
 
 <body>
+    <!-- Nav bar -->
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">Simple Counter</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <!-- Main nav, hidden for small screens -->
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/list"><i class="material-icons left">list</i>List</a></li>
+                    <% if (isLoggedIn) { %>
+                        <li><a class="btn red" href="/logout"> <i class="material-icons left">logout</i> Logout</a></li>
+                        <li><a href="/profile"><i class="material-icons left">person</i>
+                                <%=user.name %>
+                            </a></li>
+                        <% } else { %>
+                            <li><a class="btn blue darken-2" href="/login"> <i class="material-icons left">login</i>
+                                    Login</a></li>
+                            <% } %>
+                </ul>
+            </div>
+        </nav>
+        <!-- Mobile nav menu, shown when menu button clicked -->
+        <ul id="mobile-nav" class="sidenav">
+            <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+            <li><a href="/list"><i class="material-icons left">list</i>List</a></li>
+            <% if (isLoggedIn) { %>
+                <li><a class="btn red" href="/logout"> <i class="material-icons left">logout</i> Logout</a></li>
+                <li><a href="/profile"><i class="material-icons left">person</i>
+                        <%=user.name %>
+                    </a></li>
+                <% } else { %>
+                    <li><a class="btn blue darken-2" href="/login"> <i class="material-icons left">login</i> Login</a>
+                    </li>
+                    <% } %>
+        </ul>
+    </header>
+
     <div class="container">
         <h2>Item detail: <%= name %>
         </h2>
@@ -42,7 +106,15 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Tags:</th>
+                    <th>Tags:
+                        <a style="font-weight: 400" class="btn waves-effect waves-light modal-trigger right red dt-hide"
+                            id="delete-tag" onclick="insertUrlParam('deltag','true')">Delete
+                            <i class="material-icons right">delete</i></a>
+                        <a style="font-weight: 400"
+                            class="btn waves-effect waves-light modal-trigger right grey dt-show" id="delete-tag"
+                            onclick="insertUrlParam('deltag','false')">Cancel
+                            <i class="material-icons right">close</i></a>
+                    </th>
                     <td>
                         <div class="item-tags">
                             <% if(tags) { for(let i=0; i < tags.length; i++) {%>
@@ -50,6 +122,8 @@
                                     <%= tags[i] %>
                                 </a>
                                 <% } } %>
+                                    <a class="btn-flat modal-trigger" id="add-tag" href="#addtag">Add
+                                        <i class="material-icons left">add</i></a>
                         </div>
                     </td>
                 </tr>
@@ -76,12 +150,8 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <label for="descriptionInput">Item Description:</label>
-                            <textarea class="materialize-textarea" name="description" id="descriptionInput"><%= description %></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="chips no-autoinit" id="filter-tags"></div>
+                            <textarea class="materialize-textarea" name="description"
+                                id="descriptionInput"><%= description %></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -97,9 +167,10 @@
         </div>
     </div>
     <script>
+        updateState();
         M.AutoInit();
         taglist = {
-                    /* FIXME TODO */
+            /* FIXME TODO */
         };
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.chips');
@@ -110,10 +181,10 @@
                     data: taglist,
                     limit: Infinity,
                     minLength: 1
-                }, data: [                            
+                }, data: [
                     /* FIXME TODO */
-            ]
-        });
+                ]
+            });
         });</script>
 </body>
 

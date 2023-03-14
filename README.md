@@ -1,3 +1,3 @@
 # Simple Counter
 
-Made for a school project. Currently just a prototype.
+Some spaghetti code made for a school project. 
